@@ -1,17 +1,18 @@
 project(examples)
 
+add_executable(helloworld)
+#add_dependencies(helloworld opencv)
 
-add_executable(example)
-
-target_sources(example
+target_sources(helloworld
     PRIVATE
-        example.cpp
+        helloworld.cpp
 )
 
-target_link_libraries(example
+target_link_libraries(helloworld
     PRIVATE
         ProjectName
+        ${OpenCV_LIBS}
 )
 
 
-CONFIGURE_TARGET(example)
+CONFIGURE_TARGET(helloworld)

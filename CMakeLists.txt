@@ -18,6 +18,19 @@ endif()
 project(ProjectName)
 add_library(${PROJECT_NAME} STATIC)
 
+
+# OpenCV stuff
+make_directory(${CMAKE_BINARY_DIR}/deps/OpenCV)
+execute_process(
+    COMMAND ${CMAKE_COMMAND} ${CMAKE_CURRENT_SOURCE_DIR}/deps/OpenCV
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/deps/OpenCV
+)
+execute_process(
+    COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR}/deps/OpenCV -j16
+)
+
+include(${CMAKE_CURRENT_SOURCE_DIR}/deps/OpenCV/build/lib/cmake/opencv4/OpenCVConfig.cmake)
+
 # compile options
 function(CONFIGURE_TARGET TARGET_NAME)
     if (CMAKE_BUILD_TYPE STREQUAL "Debug")
